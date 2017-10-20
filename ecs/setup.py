@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 setup(
     name = "aliyun_ecs",
-    version = "0.0.1",
+    version = "0.0.2",
     keywords = ("aliyun", "ecs", "metadata", "vpc", "teachmyself"),
     description = "A set of simple tools for aliyun ecs.",
     long_description = open("README.txt").read(),
