@@ -16,8 +16,6 @@ setup(
     author_email = "teachmyself@126.com",
 
     packages = find_packages(),
-    include_packages_data = True,
-    platform = "any",
     install_requires = ["requests"],
     test_suite = "",
 

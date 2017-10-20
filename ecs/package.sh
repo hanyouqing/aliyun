@@ -10,6 +10,11 @@
 #     python setup.py bdist_egg    # take .egg package, support easy_install
 #     python setup.py sdist        # take .tar.gz package, support pip
 #     python setup.py sdist upload
+#
+#  Check:
+#     https://github.com/pypa/readme_renderer
+# Uploading:
+#     https://packaging.python.org/guides/migrating-to-pypi-org/#uploading
 ###################################################################
 #
 export PATH=.:$PATH
@@ -24,6 +29,11 @@ _msg() {
     echo "[$(date '+%F %T%z')] ${@}" | tee -a ${package_log}
 }
 
+_check() {
+    _msg "Checking by 'https://github.com/pypa/readme_renderer'"
+    python setup.py check -r -s | tee -a ${package_log}
+}
+
 _pack() {
     _msg "Packging by 'python setup.py sdist'"
     python setup.py sdist | tee -a ${package_log}
@@ -35,9 +45,9 @@ _test() {
 }
 
 _upload() {
-    _msg "Uploading by 'python setup.py sdist upload'"
+    _msg "Uploading by 'twine upload dist/*'"
     #python setup.py sdist upload | tee -a ${package_log}
-    python setup.py sdist upload
+    twine upload dist/*
 }
 
 _clean() {
@@ -51,8 +61,9 @@ _clean() {
 _help() {
     set +x
     echo ""
-    echo "Usage: $0 [help|test|pack|upload|clean]"
+    echo "Usage: $0 [help|check|test|pack|upload|clean]"
     echo "	$0 help"
+    echo "	$0 check"
     echo "	$0 test"
     echo "	$0 pack"
     echo "	$0 upload"
