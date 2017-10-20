@@ -1,0 +1,16 @@
+version: "2"
+services:
+  aliyun:
+    image: teachmyself/aliyun
+    cpu_shares: 1.0 # 1 Core
+    mem_limit: 1000000000 # 1000MB
+    environment:
+      - TIMEZONE=Asia/Shanghai
+    volumes:
+      - /aliyun/data:/aliyun/data
+    ports:
+      - 8000:8000
+    expose:
+      - 8000
+    command: ["python", "-m", "SimpleHTTPServer"]
+    restart: always
