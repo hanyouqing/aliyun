@@ -34,7 +34,7 @@ _check() {
     python setup.py check -r -s | tee -a ${package_log}
 }
 
-_pack() {
+_build() {
     _msg "Packging by 'python setup.py sdist'"
     python setup.py sdist | tee -a ${package_log}
 }
@@ -58,16 +58,28 @@ _clean() {
     rm -rf package.log
 }
 
+_auto() {
+    set +x
+    _clean
+    _check
+    _test
+    _build
+    echo ""
+    echo "You can upload by: $0 upload"
+    echo ""
+}
+
 _help() {
     set +x
     echo ""
-    echo "Usage: $0 [help|check|test|pack|upload|clean]"
+    echo "Usage: $0 [help|check|test|build|upload|clean|auto]"
     echo "	$0 help"
     echo "	$0 check"
     echo "	$0 test"
-    echo "	$0 pack"
+    echo "	$0 build"
     echo "	$0 upload"
     echo "	$0 clean"
+    echo "	$0 auto"
     echo ""
 }
 
