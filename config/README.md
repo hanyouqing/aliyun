@@ -18,4 +18,3 @@ config/ -> ~/.aliyun/
     ├── ecs.list.csv
     └── ecs.list.sql
 ```
-

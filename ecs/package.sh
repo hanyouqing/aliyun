@@ -24,28 +24,35 @@ set -xue
 
 package_log="package.log"
 
+_sucess() {
+    printf '\033[1;31;32m'; printf -- "${@}"; printf '\033[0m'
+}
+
+_error() {
+    printf '\033[1;31;40m'; printf -- "${@}"; printf '\033[0m'
+}
 
 _msg() {
     echo "[$(date '+%F %T%z')] ${@}" | tee -a ${package_log}
 }
 
 _check() {
-    _msg "Checking by 'https://github.com/pypa/readme_renderer'"
+    _msg "Checking by: $(_sucess 'python setup.py check -r -s')"
     python setup.py check -r -s | tee -a ${package_log}
 }
 
 _build() {
-    _msg "Packging by 'python setup.py sdist'"
+    _msg "Packging by: $(_sucess 'python setup.py sdist')"
     python setup.py sdist | tee -a ${package_log}
 }
 
 _test() {
-    _msg "Testing by 'python setup.py test'"
+    _msg "Testing by: $(_sucess 'python setup.py test')"
     python setup.py test | tee -a ${package_log}
 }
 
 _upload() {
-    _msg "Uploading by 'twine upload dist/*'"
+    _msg "Uploading by: $(_sucess 'twine upload dist/*')"
     #python setup.py sdist upload | tee -a ${package_log}
     twine upload dist/*
 }
@@ -65,7 +72,7 @@ _auto() {
     _test
     _build
     echo ""
-    echo "You can upload by: $0 upload"
+    echo "Now you can upload by:" $(_sucess "$0 upload")
     echo ""
 }
 
@@ -84,6 +91,8 @@ _help() {
 }
 
 if [[ ${#} -ne 1 ]]; then
+    set +x
+    _msg "$(_error 'Error: 1 option is expected, see help usage:')"
     _help
 else
     _$1
