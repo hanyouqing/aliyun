@@ -1,6 +1,8 @@
 #!/usr/bin/python
 #-* coding: utf-8 -*-
 
+import requests
+
 """
 Get metadata of aliyun ecs instances in vpc.
 
@@ -9,7 +11,6 @@ Reference:
         https://help.aliyun.com/knowledge_detail/49122.html
 """
 
-import requests
 
 metadata_url = 'http://100.100.100.200/latest/meta-data'
 
