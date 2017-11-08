@@ -63,6 +63,7 @@ _clean() {
     rm -rf dist
     rm -rf .egg
     rm -rf package.log
+    find ./ecs -type f -name *.pyc -delete
 }
 
 _auto() {
