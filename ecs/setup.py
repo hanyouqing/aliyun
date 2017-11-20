@@ -18,7 +18,7 @@ INSTALL_REQUIRES = ["requests"]
 TEST_SUITE       = ""
 SCRIPTS          = []
 CONSOLE_SCRIPTS  = [
-    "ecs-metadata4vpc = ecs.metadata:main",
+    "ecs-metadata4vpc = ecs.metadata4vpc:main",
 ]
 
 setup(
